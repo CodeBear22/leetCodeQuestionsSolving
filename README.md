@@ -13,6 +13,6 @@ Longest Palindromic Substring
 String to Integer (atoi)    
 Container With Most Water
 Letter Combinations of a Phone Number    
-Remove Nth Node From End of List 
+Remove Nth Node From End of List
 Generate Parentheses
 
