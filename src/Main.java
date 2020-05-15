@@ -1,124 +1,102 @@
-import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        DsAlgo app = new DsAlgo();
-
-
-
-        int[] sortedArray = {1,2,3,4,4,4,4,5,6,7};
-//        app.rearrangeInMaxMin(sortedArray);
-
-        int[] randomArray = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-//        app.kthLargestElement(randomArray, 6);
-//        app.rotateArrayRight(randomArray, 3);
-//        app.tippingRainWater(randomArray);
-
-        int[][] initThick = {
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1},
-                {1, 1, 1}
-        };
-
-        long[][] rate = {
-                {1, 1, 1},
-                {1, 11, 11},
-                {1, 1, 1},
-                {1, 11, 11},
-                {1, 1, 1},
-                {1, 1, 1}
-        };
-
-//        app.mazeTraveller(10, initThick, rate, 6, 3);
-
-        int[][] rotateMatrixInput = {
-                {1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16},
-                {17, 18, 19, 20}
-        };
-
-//        app.rotateMatrixNinetyDegree(rotateMatrixInput);
-
-//        int[] result = app.findFirstAndLastOccurrenceInSortedArray(sortedArray, 4);
-
-//        System.out.println(Arrays.toString(result));
-
-        int[][] spiralMatrixInput = {
-                {1,2,3,4},
-                {5,6,7,8},
-                {9,10,11,12},
-                {13,14,15,16}
-        };
-
-        //[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
-//        app.printMatrixInSpiral(spiralMatrixInput);
-
-//        int[] input = {2,3,1,1,4};
-//        boolean result = app.canJump(input);
-//        if(result == true)
-//        {
-//            System.out.println("true");
-//        } else {
-//            System.out.println("false");
-//        }
-
-//        int[][] mergeIntervalInput = {
-//                {1,6},
-//                {5,8},
-//                {9,10},
-//                {0,20}
-//        };
-//
-//        app.mergeIntervals(mergeIntervalInput);
-//
-//        int[] preorder = {3,9,20,15,7};
-//        int[] inorder = {9,3,15,20,7};
-//        TreeNode result = app.buildTree(preorder, inorder);
-//        app.printLevelOrderTraversal(result);
-
-        int [] maxContiguousSum = {-2, -3, 4, -1, -2, 1, 5, -3};
-
-//        int contiguousSum = app.maxSumSubarray(maxContiguousSum);
-//        System.out.println(contiguousSum);
-
-//        int contiguousProduct = app.maxProductSubarray(maxContiguousSum);
-
-        int[] nums1 = {1,2,2};
-        int[] nums2 = {2};
-
-//        double result = app.findMedianSortedArrays(nums1, nums2);
-
-//        app.lengthOfLongestSubstring("pwwkew");
-
-
-
-
-//        RandomizedSet customSet = new RandomizedSet();
-//        customSet.insert(11);
-//        customSet.insert(12);
-//        customSet.remove(11);
-
-//        app.largestRectangleArea(nums1);
-
-//        System.out.println(app.myAtoi("  -0012a42"));
-//        System.out.println(result);
-
-
-//        -2147483648
-//        2
-//        System.out.println(app.divide(-2147483648, 2));
-
-//        System.out.println(app.trailingZeroes(30));
-//        int[] sortedArray2 = {1,2,3,4,5,6,7};
-        TreeNode result = app.sortedArrayToBST(sortedArray);
-
-        app.maxDepth(result);
+//        problem_1();
+//        problem_3();
+//        problem_5();
+//        problem_8();
+//        problem_11();
+        problem_17();
     }
 
+
+    //Add Two Numbers
+    public static void problem_2() {
+        problemStartEndAnnouncer(2, true);
+
+        DsAlgo app = new DsAlgo();
+        int[] num1 = {2, 4, 3};
+        int[] num2 = {5, 6, 4};
+        ListNode l1 = app.makeArrayToLinkedList(num1);
+        ListNode l2 = app.makeArrayToLinkedList(num2);
+        ListNode result = app.addTwoNumbers(l1, l2);
+        app.printList(result);
+
+        problemStartEndAnnouncer(2, false);
+    }
+
+    //Longest Substring Without Repeating Characters
+    public static void problem_3() {
+        problemStartEndAnnouncer(3, true);
+
+        DsAlgo app = new DsAlgo();
+        String input = "aabaab!bb";
+        int result = app.lengthOfLongestSubstring(input);
+        System.out.println(result);
+
+        problemStartEndAnnouncer(3, false);
+    }
+
+    //Longest Palindromic Substring
+    public static void problem_5() {
+        problemStartEndAnnouncer(5, true);
+
+        DsAlgo app = new DsAlgo();
+
+        String input = "babad";
+        String result = app.longestPalindrome(input);
+        System.out.println(result);
+
+        problemStartEndAnnouncer(5, false);
+    }
+
+    //String to Integer (atoi)
+    public static void problem_8() {
+        problemStartEndAnnouncer(8, true);
+
+        DsAlgo app = new DsAlgo();
+        String input = "91283472332 with words";
+        int result = app.myAtoi(input);
+        System.out.println(result);
+
+        problemStartEndAnnouncer(8, true);
+    }
+
+    //Container With Most Water
+    public static void problem_11() {
+        problemStartEndAnnouncer(11, true);
+
+        DsAlgo app = new DsAlgo();
+
+        int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+        int result = app.largestRectangleArea(input);
+        System.out.println(result);
+
+        problemStartEndAnnouncer(11, false);
+    }
+
+    //Letter Combinations of a Phone Number
+    public static void problem_17() {
+        problemStartEndAnnouncer(17, true);
+
+        DsAlgo app = new DsAlgo();
+
+        String input = "234";
+        List<String> result = app.letterCombinations(input);
+        for (String str : result) {
+            System.out.println(str);
+        }
+
+        problemStartEndAnnouncer(17, false);
+    }
+
+    public static void problemStartEndAnnouncer(int problemNumber, boolean starts) {
+        if (starts) {
+            System.out.println("#################### LeetCode Problem Number : " + problemNumber + " STARTS ####################");
+        } else {
+            System.out.println("#################### LeetCode Problem Number : " + problemNumber + " ENDS ####################");
+        }
+    }
 }

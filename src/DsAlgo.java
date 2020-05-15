@@ -1,6 +1,3 @@
-import com.sun.source.tree.LiteralTree;
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 public class DsAlgo {
@@ -106,7 +103,6 @@ public class DsAlgo {
     public void tippingRainWater(int[] bars) {
         int[] maxBarsRightToLeft = new int[bars.length];
         maxBarsRightToLeft[0] = bars[0];
-        ;
         int waterStored = 0;
         for (int i = 1; i < bars.length; i++) {
             if (bars[i] > maxBarsRightToLeft[i - 1]) {
@@ -184,47 +180,10 @@ public class DsAlgo {
             System.out.println("NO");
     }
 
-    private Boolean mazeTravellerHelper(int t, int[][] initThickness, long[][] rate, int rows, int cols, int currRow, int currCol, int steps, HashMap<String, Boolean> cachedResult) {
-        if (currRow >= rows || currCol >= cols) {
-            return false;
-        }
-
-        if (currRow == rows - 1 && currCol == cols - 1) {
-            return true;
-        }
-
-        String key = currRow + "," + currCol;
-
-        if (cachedResult.containsKey(key)) {
-            System.out.println("cached result--" + key);
-            return cachedResult.get(key);
-        }
-
-
-        long currentThickness = initThickness[currRow][currCol] + (rate[currRow][currCol] * steps);
-
-        if (currentThickness >= (long) t) {
-            return false;
-        }
-
-
-        Boolean down = mazeTravellerHelper(t, initThickness, rate, rows, cols, currRow + 1, currCol, steps + 1, cachedResult);
-
-        cachedResult.put((currRow + 1) + "," + currCol, down);
-        if (down) {
-            return true;
-        }
-        Boolean right = mazeTravellerHelper(t, initThickness, rate, rows, cols, currRow, currCol + 1, steps + 1, cachedResult);
-
-
-        cachedResult.put(currRow + "," + (currCol + 1), right);
-        if (right) {
-            return true;
-        }
-
-        return false;
-
-    }
+    /**
+     * leetCode 17 prop
+     */
+    private static final String[] digitToCharactersMapping = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
     private void __swapInArray(int[] arr, int firstIndex, int secondIndex) {
         int temp = arr[firstIndex];
@@ -718,36 +677,41 @@ public class DsAlgo {
         return true;
     }
 
-    public int lengthOfLongestSubstring(String s) {
-
-        HashMap<Character, Integer> map = new HashMap<>();
-
-        char[] string = s.toCharArray();
-
-        int l, r, index, length;
-        map.put(string[0], 0);
-
-        l = r = 0;
-
-        length = 1;
-
-        for (int i = 1; i < string.length; i++) {
-            if (map.containsKey(string[i])) {
-                index = map.get(string[i]);
-
-                while (l <= index) {
-                    map.remove(string[l++]);
-                }
-                map.put(string[i], i);
-            } else {
-                map.put(string[i], i);
-
-                if (map.size() > length)
-                    length = map.size();
-            }
+    private Boolean mazeTravellerHelper(int t, int[][] initThickness, long[][] rate, int rows, int cols, int currRow, int currCol, int steps, HashMap<String, Boolean> cachedResult) {
+        if (currRow >= rows || currCol >= cols) {
+            return false;
         }
-        System.out.println(length);
-        return length;
+
+        if (currRow == rows - 1 && currCol == cols - 1) {
+            return true;
+        }
+
+        String key = currRow + "," + currCol;
+
+        if (cachedResult.containsKey(key)) {
+            System.out.println("cached result--" + key);
+            return cachedResult.get(key);
+        }
+
+
+        long currentThickness = initThickness[currRow][currCol] + (rate[currRow][currCol] * steps);
+
+        if (currentThickness >= (long) t) {
+            return false;
+        }
+
+
+        Boolean down = mazeTravellerHelper(t, initThickness, rate, rows, cols, currRow + 1, currCol, steps + 1, cachedResult);
+
+        cachedResult.put((currRow + 1) + "," + currCol, down);
+        if (down) {
+            return true;
+        }
+        Boolean right = mazeTravellerHelper(t, initThickness, rate, rows, cols, currRow, currCol + 1, steps + 1, cachedResult);
+
+
+        cachedResult.put(currRow + "," + (currCol + 1), right);
+        return right;
 
     }
 
@@ -833,46 +797,34 @@ public class DsAlgo {
         return result;
     }
 
-    public int largestRectangleArea(int[] heights) {
+    /**
+     * leetCode 3
+     *
+     * @param s String
+     * @return int
+     */
+    public int lengthOfLongestSubstring(String s) {
 
-        if (heights.length == 0) {
-            return 0;
+        if (s.length() == 1 || s.length() == 0) {
+            return s.length();
         }
-        if (heights.length == 1) {
-            return heights[0];
-        }
+        HashMap<Character, Integer> map = new HashMap<>();
 
-
-        int minHeight = heights[0];
-        int left, right;
-        left = right = 0;
-
-        int currentArea, individualArea;
-        int maxArea = heights[0];
-        right++;
-        while (left < right && right < heights.length) {
-            System.out.println("Left : " + left + " Right : " + right);
-            minHeight = Math.min(minHeight, heights[right]);
-
-            currentArea = minHeight * (right - left + 1);
-            individualArea = heights[right];
-
-
-            System.out.println("CurrentArea : " + currentArea + " individualArea : " + individualArea);
-
-            if (individualArea >= currentArea) {
-                left = right;
-                minHeight = heights[right];
-                maxArea = Math.max(individualArea, maxArea);
+        int j = 0;
+        int maxLength = 0;
+        int index;
+        for (int i = 0; i < s.length(); i++) {
+            if (!map.containsKey(s.charAt(i))) {
+                map.put(s.charAt(i), i);
+                maxLength = Math.max(maxLength, i - j + 1);
             } else {
-                maxArea = Math.max(currentArea, maxArea);
+                index = map.get(s.charAt(i));
+                j = index >= j ? index + 1 : j;
+                map.put(s.charAt(i), i);
+                maxLength = Math.max(maxLength, i - j + 1);
             }
-            right++;
         }
-        System.out.println("Max Area : " + maxArea);
-
-        return maxArea;
-
+        return maxLength;
     }
 
     public String minWindow(String s, String t) {
@@ -1002,67 +954,31 @@ public class DsAlgo {
         return result;
     }
 
-    public int myAtoi(String str) {
+    /**
+     * LeetCode 11
+     *
+     * @param heights //int[]
+     * @return int
+     */
+    public int largestRectangleArea(int[] heights) {
 
-        str = str.trim();
-        String[] arr = str.split(" ");
-
-        str = arr[0];
-
-        if (str.length() == 0) {
+        int left = 0, right = heights.length - 1;
+        if (right == 0) {
             return 0;
         }
 
-        int result = 0;
-        try {
-            result = Integer.parseInt(arr[0]);
-//            return result;
-        } catch (NumberFormatException e) {
+        int maxArea = 0, currentArea, minHeight;
 
-            boolean negative = false;
-            if (str == null) {
-                return 0;
-            }
-            int length = str.length();
-            int temp, i = 0;
-            if (str.charAt(0) == '-') {
-                if (length == 1) {
-                    return 0;
-                }
-                i = 1;
-                negative = true;
-            } else if (str.charAt(0) == '+') {
-                if (length == 1) {
-                    return 0;
-                }
-                i = 1;
-                negative = false;
-            }
-            for (; i < length; i++) {
-                char c = str.charAt(i);
-                if (c < '0' || c > '9') {
-                    break;
-//                    return result;
-                }
+        while (left < right) {
+            minHeight = Math.min(heights[left], heights[right]);
+            currentArea = minHeight * (right - left);
+            maxArea = Math.max(currentArea, maxArea);
 
-                temp = c - '0';
-                if (((long) result * 10) + temp < (long) 2147483647) {
-                    System.out.println();
-                    result = ((result * 10) + temp);
-                } else {
+            while (left < right && heights[left] <= minHeight) left++;
 
-                    if (negative)
-                        return -2147483648;
-                    return 2147483647;
-                }
-            }
-            System.out.println("negative " + negative);
-            if (negative) {
-                result *= -1;
-            }
+            while (left < right && heights[right] <= minHeight) right--;
         }
-
-        return result;
+        return maxArea;
     }
 
     public int divide(int dividend, int divisor) {
@@ -1153,16 +1069,65 @@ public class DsAlgo {
         return this._maxDepthHelper(root, 0);
     }
 
-    private int _maxDepthHelper(TreeNode root, int depth)
-    {
-        if(root == null)
-        {
+    /**
+     * leetCode 8
+     *
+     * @param str
+     * @return
+     */
+    public int myAtoi(String str) {
+
+        int start;
+        long result;
+
+        start = 0;
+        result = 0;
+        str = str.trim();
+//        String.tri
+        while (start < str.length() && str.charAt(start) == ' ') start++;
+
+        if (start >= str.length()) return 0;
+
+        boolean negative = false;
+
+        if (str.charAt(start) == '-') {
+            negative = true;
+            start++;
+        } else if (str.charAt(start) == '+') {
+//            negative = false;
+            start++;
+        } else if (!Character.isDigit(str.charAt(start))) {
+            return 0;
+        }
+
+        while (start < str.length()) {
+            if (!Character.isDigit(str.charAt(start)))
+                break;
+            if (negative) {
+                result = result * 10 - (str.charAt(start) - '0');
+                if (result <= Integer.MIN_VALUE) return Integer.MIN_VALUE;
+            } else {
+                result = result * 10 + (str.charAt(start) - '0');
+                if (result >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            }
+            start++;
+        }
+        return (int) result;
+    }
+
+    private int _maxDepthHelper(TreeNode root, int depth) {
+        if (root == null) {
             return depth;
         }
         int leftDepth = this._maxDepthHelper(root.left, depth);
         int rightDepth = this._maxDepthHelper(root.right, depth);
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+//    public String entityParser(String text) {
+//        String[] entities = {};
+//        String[] character = {};
+//    }
 
 
     private int binarySearch(int[] input, int target) {
@@ -1186,5 +1151,209 @@ public class DsAlgo {
         return -1;
     }
 
+    /**
+     * leetCode 2
+     *
+     * @param l1 ListNode list
+     * @param l2 ListNode list
+     * @return ListNode
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
+        int carry = 0;
+        int sum;
+        ListNode result = null;
+        ListNode result2 = null;
+        while (l1 != null && l2 != null) {
+            sum = l1.val + l2.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            if (result == null) {
+                result = new ListNode(sum);
+                result2 = result;
+            } else {
+                result.next = new ListNode(sum);
+                result = result.next;
+            }
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        while (l1 != null) {
+            sum = l1.val + carry;
+            sum = sum % 10;
+            carry = sum / 10;
+
+            if (result == null) {
+                result = new ListNode(sum);
+                result2 = result;
+            } else {
+                result.next = new ListNode(sum);
+                result = result.next;
+            }
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            sum = l2.val + carry;
+            sum = sum % 10;
+            carry = sum / 10;
+
+            if (result == null) {
+                result = new ListNode(sum);
+                result2 = result;
+            } else {
+                result.next = new ListNode(sum);
+                result = result.next;
+            }
+            l2 = l2.next;
+        }
+
+        if (carry > 0) {
+            result.next = new ListNode(carry);
+        }
+        return result2;
+    }
+
+    /**
+     * leetCode 17
+     *
+     * @param digits
+     * @return
+     */
+    public List<String> letterCombinations(String digits) {
+
+        char[] tempCombination = new char[digits.length()];
+        List<String> combinations = new ArrayList<>();
+
+        combinationsMakerHelper(digits, 0, tempCombination, combinations);
+        return combinations;
+    }
+
+    /**
+     * leetCode 17 helper
+     *
+     * @param number
+     * @param digit
+     * @param tempCombination
+     * @param combinations
+     */
+    private void combinationsMakerHelper(String number, int digit, char[] tempCombination, List<String> combinations) {
+        if (digit == number.length()) {
+            combinations.add(new String(tempCombination));
+        } else {
+            for (int i = 0; i < digitToCharactersMapping[number.charAt(digit) - '0'].length(); i++) {
+                char c = digitToCharactersMapping[number.charAt(digit) - '0'].charAt(i);
+                tempCombination[digit] = c;
+                combinationsMakerHelper(number, digit + 1, tempCombination, combinations);
+            }
+        }
+    }
+
+    /**
+     * leetCode 5
+     *
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        int N = s.length();
+        if (N == 0)
+            return "";
+        String str = _getModifiedString(s, N);
+        int len = (2 * N) + 1;
+        int[] P = new int[len];
+        int c = 0; //stores the center of the longest palindromic substring until now
+        int r = 0; //stores the right boundary of the longest palindromic substring until now
+        int maxLen = 0;
+        int left = 0, right = 0;
+        String maxString = "";
+        for (int i = 0; i < len; i++) {
+            //get mirror index of i
+            int mirror = (2 * c) - i;
+
+            //see if the mirror of i is expanding beyond the left boundary of current longest palindrome at center c
+            //if it is, then take r - i as P[i]
+            //else take P[mirror] as P[i]
+            if (i < r) {
+                P[i] = Math.min(r - i, P[mirror]);
+            }
+
+            //expand at i
+            int a = i + (1 + P[i]);
+            int b = i - (1 + P[i]);
+            while (a < len && b >= 0 && str.charAt(a) == str.charAt(b)) {
+                P[i]++;
+                a++;
+                b--;
+            }
+
+            //check if the expanded palindrome at i is expanding beyond the right boundary of current longest palindrome at center c
+            //if it is, the new center is i
+            if (i + P[i] > r) {
+                c = i;
+                r = i + P[i];
+
+                if (P[i] > maxLen) { //update maxlen
+                    left = c - (r - c);
+                    right = r;
+                    maxLen = P[i];
+                }
+            }
+        }
+        return str.substring(left, right + 1).replaceAll("#", "");
+    }
+
+    /**
+     * leetCode 5 helper
+     *
+     * @param s
+     * @param N
+     * @return
+     */
+    private String _getModifiedString(String s, int N) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            sb.append("#");
+            sb.append(s.charAt(i));
+        }
+        sb.append("#");
+        return sb.toString();
+    }
+
+    /**
+     * Convert int[] to ListNode list
+     *
+     * @param listValues int[]
+     * @return ListNode
+     */
+    public ListNode makeArrayToLinkedList(int[] listValues) {
+        if (listValues.length == 0) {
+            return null;
+        }
+
+        ListNode newList = new ListNode(listValues[0]);
+        ListNode current = newList;
+
+        for (int i = 1; i < listValues.length; i++) {
+            current.next = new ListNode(listValues[i]);
+            current = current.next;
+        }
+        return newList;
+    }
+
+    /**
+     * To print ListNode
+     *
+     * @param head ListNode
+     */
+    public void printList(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val);
+            head = head.next;
+            if (head != null)
+                System.out.print(" -> ");
+        }
+        System.out.println();
+    }
 }
