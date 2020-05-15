@@ -8,7 +8,7 @@ and in  DsAlgo.java like this 'leetCode 2'
 _**Problems Solved till now**_
 
 Add Two Numbers <br>
-Longest Substring Without Repeating Characters <br>   
+Longest Substring Without Repeating Characters <br>
 Longest Palindromic Substring <br>
 String to Integer (atoi) <br>
 Container With Most Water <br>
