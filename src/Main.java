@@ -8,7 +8,9 @@ public class Main {
 //        problem_5();
 //        problem_8();
 //        problem_11();
-        problem_17();
+//        problem_17();
+//        problem_19();
+        problem_22();
     }
 
 
@@ -90,6 +92,31 @@ public class Main {
         }
 
         problemStartEndAnnouncer(17, false);
+    }
+
+    //Remove Nth Node From End of List
+    public static void problem_19() {
+        problemStartEndAnnouncer(19, true);
+
+        DsAlgo app = new DsAlgo();
+        int[] inputArr = {1, 2, 3, 4, 5};
+        ListNode inputHead = app.makeArrayToLinkedList(inputArr);
+        ListNode result = app.removeNthFromEnd(inputHead, 2);
+        app.printList(result);
+    }
+
+    //Generate Parentheses
+    public static void problem_22() {
+        problemStartEndAnnouncer(22, true);
+
+        DsAlgo app = new DsAlgo();
+        List<String> result = app.generateParenthesis(3);
+
+        for (String str : result) {
+            System.out.println(str);
+        }
+
+        problemStartEndAnnouncer(22, false);
     }
 
     public static void problemStartEndAnnouncer(int problemNumber, boolean starts) {
