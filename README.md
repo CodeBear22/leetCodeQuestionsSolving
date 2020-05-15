@@ -7,12 +7,12 @@ and in  DsAlgo.java like this 'leetCode 2'
 
 _**Problems Solved till now**_
 
-Add Two Numbers   
-Longest Substring Without Repeating Characters    
-Longest Palindromic Substring   
-String to Integer (atoi)    
-Container With Most Water
-Letter Combinations of a Phone Number    
-Remove Nth Node From End of List
-Generate Parentheses
+Add Two Numbers <br>
+Longest Substring Without Repeating Characters <br>   
+Longest Palindromic Substring <br>
+String to Integer (atoi) <br>
+Container With Most Water <br>
+Letter Combinations of a Phone Number <br>
+Remove Nth Node From End of List <br>
+Generate Parentheses <br>
 
