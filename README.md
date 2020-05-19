@@ -15,4 +15,18 @@ Container With Most Water <br>
 Letter Combinations of a Phone Number <br>
 Remove Nth Node From End of List <br>
 Generate Parentheses <br>
-
+Divide Two Integers <br>
+Find All Duplicates in an Array <br>
+Permutations <br>
+Rotate Image<br>
+Valid Sudoku<br>
+Group Anagrams<br
+Spiral Matrix<br>
+Jump Game<br>
+Merge Intervals<br>
+Unique Paths<br>
+Set Matrix Zeroes<br>
+Sort Colors<br>
+Subsets<br>
+Word Search<br>
+Decode Ways<br>

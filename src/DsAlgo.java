@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.zip.ZipEntry;
 
 public class DsAlgo {
 
@@ -258,86 +260,61 @@ public class DsAlgo {
 
     }
 
+    /**
+     * leetCode 48
+     *
+     * @param matrix
+     */
     public void rotateMatrixNinetyDegree(int[][] matrix) {
         int n = matrix.length;
-
-        for (int x = 0; x < n / 2; x++) {
-            for (int y = x; y < n - x - 1; y++) {
-                int temp = matrix[x][y];
-
-                matrix[x][y] = matrix[n - 1 - y][x];
-                matrix[n - 1 - y][x] = matrix[n - 1 - x][n - 1 - y];
-                matrix[n - 1 - x][n - 1 - y] = matrix[y][n - 1 - x];
-                matrix[y][n - 1 - x] = temp;
+        int temp;
+        for (int i = 0; i < n / 2; i++) {
+            for (int j = i; j < n - i - 1; j++) {
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[n - j - 1][i];
+                matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];
+                matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];
+                matrix[j][n - i - 1] = temp;
             }
         }
-
-        for (int[] row : matrix)
-            System.out.println(Arrays.toString(row));
     }
 
+    /**
+     * leetCode 54
+     *
+     * @param matrix
+     * @return
+     */
     public List<Integer> printMatrixInSpiral(int[][] matrix) {
-
-        for (int[] row : matrix)
-            System.out.println(Arrays.toString(row));
-
-
-        List<Integer> list = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
 
         if (matrix.length == 0)
-            return list;
+            return result;
 
-        int rowStart, rowEnd, colStart, colEnd;
+        int rowStart = 0, colStart = 0, rowEnd = matrix.length, colEnd = matrix[0].length;
 
-        int x, y, i;
-        y = matrix.length;
-        x = matrix[0].length;
-
-
-        rowStart = 0;
-        colStart = 0;
-        rowEnd = y;
-        colEnd = x;
-
-
-        while (colStart < colEnd && rowStart < rowEnd) {
-
-            for (i = colStart; i < colEnd; i++) {
-                list.add(matrix[rowStart][i]);
-                System.out.print("right-" + matrix[rowStart][i] + "->");
-            }
+        while (rowStart < rowEnd && colStart < colEnd) {
+            for (int i = colStart; i < colEnd; i++)
+                result.add(matrix[rowStart][i]);
             rowStart++;
 
-            for (i = rowStart; i < rowEnd; i++) {
-                list.add(matrix[i][colEnd - 1]);
-
-                System.out.print("down-" + matrix[i][colEnd - 1] + "->");
-            }
+            for (int i = rowStart; i < rowEnd; i++)
+                result.add(matrix[i][colEnd - 1]);
             colEnd--;
 
-
             if (rowStart < rowEnd) {
-                for (i = colEnd - 1; i >= colStart; i--) {
-                    list.add(matrix[rowEnd - 1][i]);
-
-                    System.out.print("left-" + matrix[rowEnd - 1][i] + "->");
-
-                }
+                for (int i = colEnd - 1; i >= colStart; i--)
+                    result.add(matrix[rowEnd - 1][i]);
                 rowEnd--;
-
             }
 
             if (colStart < colEnd) {
-
-                for (i = rowEnd - 1; i >= rowStart; i--) {
-                    list.add(matrix[i][colStart]);
-
-                    System.out.print("UP-" + matrix[i][colStart] + "->");
-                }
+                for (int i = rowEnd - 1; i >= rowStart; i--)
+                    result.add(matrix[i][colStart]);
                 colStart++;
             }
         }
-        return list;
+        return result;
     }
 
     public int[] findFirstAndLastOccurrenceInSortedArray(int[] nums, int target) {
@@ -374,36 +351,39 @@ public class DsAlgo {
         return result;
     }
 
+    /**
+     * leetCode 55
+     *
+     * @param nums
+     * @return
+     */
     public boolean canJump(int[] nums) {
-        int max = nums[0];
 
-        if (nums.length <= 1) {
-            return true;
-        }
+        int maxReachableIndex = nums[0];
 
         for (int i = 0; i < nums.length; i++) {
-            if (max <= i && nums[i] == 0) {
-                return false;
-            }
 
-            if (i + nums[i] > max) {
-                max = i + nums[i];
-            }
-
-            if (max >= nums.length - 1) {
+            if (maxReachableIndex >= nums.length - 1)
                 return true;
-            }
-        }
 
+            if (maxReachableIndex <= i && nums[i] == 0)
+                return false;
+
+            if (i + nums[i] > maxReachableIndex)
+                maxReachableIndex = i + nums[i];
+        }
         return false;
     }
 
+    /**
+     * leetCode 56
+     *
+     * @param intervals
+     * @return
+     */
     public int[][] mergeIntervals(int[][] intervals) {
-        int[] prev, curr, item;
-        int p = 0;
-
-        item = new int[2];
-//        int[][] result;
+        if (intervals.length == 0 || intervals.length == 1)
+            return intervals;
 
         Arrays.sort(intervals, new Comparator<int[]>() {
             @Override
@@ -412,34 +392,33 @@ public class DsAlgo {
             }
         });
 
-        List<int[]> result = new ArrayList<int[]>();
+        List<int[]> result = new ArrayList<>();
+
         result.add(intervals[0]);
+        int previousIndex = 0;
 
         for (int i = 1; i < intervals.length; i++) {
-            prev = result.get(p);
-            curr = intervals[i];
+            int[] temp = result.get(previousIndex);
 
-            if (curr[0] <= prev[1]) {
-                item = prev;
-                if (curr[1] > prev[1]) {
-                    item[1] = curr[1];
-                }
-                if (curr[0] < prev[0]) {
-                    item[0] = curr[0];
-                }
-                result.set(p, item);
-            } else {
-                result.add(curr);
-                p++;
+            if (temp[1] >= intervals[i][0] && temp[1] < intervals[i][1]) {
+                temp[1] = intervals[i][1];
+                result.set(previousIndex, temp);
+            } else if (temp[1] < intervals[i][0]) {
+                result.add(intervals[i]);
+                previousIndex++;
             }
         }
-
         int[][] rr = new int[result.size()][2];
-        result.toArray(rr);
-        return rr;
+        return result.toArray(rr);
     }
 
+    /**
+     * leetCode 73
+     *
+     * @param matrix
+     */
     public void setZeroes(int[][] matrix) {
+
         List<Integer> rows = new ArrayList<>();
         List<Integer> cols = new ArrayList<>();
 
@@ -452,15 +431,14 @@ public class DsAlgo {
             }
         }
 
-        for (Integer r : rows) {
-            Arrays.fill(matrix[r], 0);
+        for (Integer row : rows) {
+            Arrays.fill(matrix[row], 0);
         }
 
-        for (Integer c : cols) {
-            for (int k = 0; k < matrix.length; k++) {
-                matrix[k][c] = 0;
+        for (Integer col : cols) {
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][col] = 0;
             }
-
         }
     }
 
@@ -737,25 +715,36 @@ public class DsAlgo {
         return -1;
     }
 
+    /**
+     * leetCode 49
+     *
+     * @param strs
+     * @return
+     */
     public List<List<String>> groupAnagrams(String[] strs) {
 
+        List<List<String>> result = new ArrayList<>();
+
+        if (strs.length == 0)
+            return result;
+
         HashMap<String, List<String>> map = new HashMap<>();
+        String sortedWord;
+        char[] temp;
 
-        for (String value : strs) {
-            char[] str = value.toCharArray();
-            Arrays.sort(str);
-            String s = Arrays.toString(str);
-
-            if (map.containsKey(s)) {
-                List<String> list = map.get(s);
-                list.add(value);
-                map.put(s, list);
+        for (int i = 0; i < strs.length; i++) {
+            temp = strs[i].toCharArray();
+            Arrays.sort(temp);
+            sortedWord = new String(temp);
+            if (map.containsKey(sortedWord)) {
+                List<String> anagramGroup = map.get(sortedWord);
+                anagramGroup.add(strs[i]);
+                map.put(sortedWord, anagramGroup);
             } else {
-                List<String> newList = new ArrayList<>();
-                newList.add(value);
-                map.put(s, newList);
+                List<String> anagramGroup = new ArrayList<>();
+                anagramGroup.add(strs[i]);
+                map.put(sortedWord, anagramGroup);
             }
-
         }
         return new ArrayList<>(map.values());
     }
@@ -981,44 +970,45 @@ public class DsAlgo {
         return maxArea;
     }
 
+    /**
+     * leetCode 29
+     *
+     * @param dividend
+     * @param divisor
+     * @return
+     */
     public int divide(int dividend, int divisor) {
+        int result = 0;
 
-        boolean negative = dividend < 0 ^ divisor < 0;
-        dividend = Math.abs(dividend);
-        divisor = Math.abs(divisor);
-        int quotient = 0;
+        if (divisor == 1) return dividend;
 
-        if (divisor == 1) {
-            if (dividend == Integer.MAX_VALUE || dividend == Integer.MIN_VALUE) {
-                if (negative) {
-                    return Integer.MIN_VALUE;
-                } else {
-                    return Integer.MAX_VALUE;
-                }
-            } else {
-                return negative ? dividend * -1 : dividend;
-            }
+        if (divisor == -1) return (dividend == Integer.MIN_VALUE) ? Integer.MAX_VALUE : -dividend;
+
+        if (divisor == 0) return Integer.MAX_VALUE;
+
+        if (dividend == 0) return 0;
+
+        boolean negative = (dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0);
+
+        long divis = Math.abs((long) divisor);
+        long divid = Math.abs((long) dividend);
+
+        result = _divideHelper(divis, divid);
+        return negative ? -result : result;
+    }
+
+    private int _divideHelper(long divisor, long dividend) {
+        if (divisor > dividend)
+            return 0;
+
+        int result = 1;
+        long sum = divisor;
+
+        while ((sum + sum) <= dividend) {
+            sum += sum;
+            result += result;
         }
-
-
-        while (dividend >= divisor) {
-            dividend = dividend - divisor;
-
-            if (dividend == Integer.MAX_VALUE || dividend == Integer.MIN_VALUE) {
-                if (negative) {
-                    return Integer.MIN_VALUE;
-                } else {
-                    return Integer.MAX_VALUE;
-                }
-            }
-
-            quotient++;
-        }
-        if (negative)
-            quotient = quotient * -1;
-
-//        System.out.println(quotient);
-        return quotient;
+        return result + _divideHelper(divisor, dividend - sum);
     }
 
     public int trailingZeroes(int n) {
@@ -1252,6 +1242,7 @@ public class DsAlgo {
 
     /**
      * leetCode 5
+     * Reference https://medium.com/hackernoon/manachers-algorithm-explained-longest-palindromic-substring-22cb27a5e96f
      *
      * @param s
      * @return
@@ -1415,5 +1406,361 @@ public class DsAlgo {
             tempCombination[currentIndex] = ')';
             _generateParenthesisHelper(result, tempCombination, currentIndex + 1, closeBracketsLeft - 1, openBracketsLeft);
         }
+    }
+
+    /**
+     * leetCode 46
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        int[] tempCombination = new int[nums.length];
+        boolean[] usedIndexes = new boolean[nums.length];
+        Arrays.fill(usedIndexes, false);
+        _permuteHelper(nums, result, tempCombination, usedIndexes, 0);
+        return result;
+    }
+
+    private void _permuteHelper(int[] input, List<List<Integer>> result, int[] tempCombination, boolean[] usedIndexes, int currentIndex) {
+        if (currentIndex == input.length) {
+            List<Integer> combination = new ArrayList<>();
+            for (int item : tempCombination)
+                combination.add(item);
+            result.add(combination);
+        } else {
+
+            for (int i = 0; i < usedIndexes.length; i++) {
+                if (!usedIndexes[i]) {
+                    tempCombination[currentIndex] = input[i];
+                    usedIndexes[i] = true;
+                    _permuteHelper(input, result, tempCombination, usedIndexes, currentIndex + 1);
+                    usedIndexes[i] = false;
+                }
+            }
+        }
+    }
+
+    /**
+     * leetCode 442
+     *
+     * @param nums
+     * @return
+     */
+    public List<Integer> findDuplicates(int[] nums) {
+
+        List<Integer> result = new ArrayList<>();
+        int index;
+        for (int i = 0; i < nums.length; i++) {
+            index = nums[i] < 0 ? (-1 * nums[i]) - 1 : nums[i] - 1;
+
+            if (nums[index] < 0)
+                result.add(nums[i] < 0 ? -1 * nums[i] : nums[i]);
+
+            nums[index] = -nums[index];
+        }
+        return result;
+    }
+
+    /**
+     * leetCode 36
+     *
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku(char[][] board) {
+//        boolean result = true;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') {
+                    if (!_isValidSudokuHelper(board, board[i][j], i, j))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean _isValidSudokuHelper(char[][] board, char k, int m, int n) {
+
+        //vertical check
+        for (int i = 0; i < 9; i++) {
+            if (m != i && board[i][n] != '.' && board[i][n] == k)
+                return false;
+        }
+
+        //horizontal check
+        for (int i = 0; i < 9; i++) {
+            if (n != i && board[m][i] != '.' && board[m][i] == k)
+                return false;
+        }
+
+        //subMatrix check
+        int startX = (m / 3) * 3;
+        int startY = (n / 3) * 3;
+        for (int i = startX; i < startX + 3; i++) {
+            for (int j = startY; j < startY + 3; j++) {
+                if (!(m == i && n == j) && board[i][j] != '.' && board[i][j] == k)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * leetcode 62
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public int uniquePaths(int m, int n) {
+
+        int[][] grid = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0)
+                    grid[i][j] = 1;
+                else if (i == 0)
+                    grid[i][j] = grid[i][j - 1];
+                else if (j == 0)
+                    grid[i][j] = grid[i - 1][j];
+                else {
+                    int comingFromUp = grid[i - 1][j];
+                    int comingFromRight = grid[i][j - 1];
+                    grid[i][j] = comingFromRight + comingFromUp;
+                }
+
+            }
+        }
+        return grid[m - 1][n - 1];
+    }
+
+    public int minStep(int m, int n) {
+
+        int[][] grid = new int[m][n];
+
+//        Arrays.fill(grid, 0);
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0)
+                    grid[i][j] = 0;
+                else if (i == 0)
+                    grid[i][j] = grid[i][j - 1] + 1;
+                else if (j == 0)
+                    grid[i][j] = grid[i][j] + 1;
+                else {
+                    int comingFromUp = grid[i - 1][j];
+                    int comingFromRight = grid[i][j - 1];
+                    grid[i][j] = comingFromRight > comingFromUp ? comingFromRight + 1 : comingFromUp + 1;
+                }
+
+            }
+        }
+        return grid[m - 1][n - 1];
+    }
+
+    /**
+     * leetCode 63
+     *
+     * @param obstacleGrid
+     * @return
+     */
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+
+        /*Faster solution*/
+
+//        int width = obstacleGrid[0].length;
+//        int[] dp = new int[width];
+//        dp[0] = 1;
+//        for (int[] row : obstacleGrid) {
+//            for (int j = 0; j < width; j++) {
+//                if (row[j] == 1)
+//                    dp[j] = 0;
+//                else if (j > 0)
+//                    dp[j] += dp[j - 1];
+//            }
+//        }
+//        return dp[width - 1];
+
+        /*faster solution ends*/
+
+
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (obstacleGrid[i][j] == 1) {
+                    obstacleGrid[i][j] = 0;
+                } else {
+                    if (i == 0 && j == 0) {
+                        obstacleGrid[i][j] = 1;
+                    } else if (i == 0) {
+                        obstacleGrid[i][j] = obstacleGrid[i][j - 1];
+                    } else if (j == 0) {
+                        obstacleGrid[i][j] = obstacleGrid[i - 1][j];
+                    } else {
+                        obstacleGrid[i][j] = obstacleGrid[i - 1][j] + obstacleGrid[i][j - 1];
+                    }
+                }
+            }
+        }
+        return obstacleGrid[m - 1][n - 1];
+    }
+
+    /**
+     * leetCode 75
+     *
+     * @param nums
+     */
+    public void sortColors(int[] nums) {
+
+        int setterIndex = 0, oneCount = 0, twoCount = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            switch (nums[i]) {
+                case 0: {
+                    nums[setterIndex++] = 0;
+                }
+                break;
+                case 1: {
+                    oneCount++;
+                }
+                break;
+                case 2: {
+                    twoCount++;
+                }
+            }
+        }
+
+        while (oneCount > 0) {
+            nums[setterIndex++] = 1;
+            oneCount--;
+        }
+
+        while (twoCount > 0) {
+            nums[setterIndex++] = 2;
+            twoCount--;
+        }
+
+        System.out.println(Arrays.toString(nums));
+    }
+
+    /**
+     * leetCode 78
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+
+        int totalPossibleCombination = (int) Math.pow(2, (double) nums.length);
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < totalPossibleCombination; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = nums.length - 1; j >= 0; j--) {
+                boolean valid = (i & (1 << j)) != 0;
+                System.out.println(valid);
+                if (valid) {
+                    list.add(nums[j]);
+                }
+            }
+            result.add(list);
+        }
+
+        return result;
+    }
+
+    /**
+     * leetCode 79
+     *
+     * @param board
+     * @param word
+     * @return
+     */
+    public boolean exist(char[][] board, String word) {
+        char[] charArr = word.toCharArray();
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (_existHelper(board, charArr, 0, i, j))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean _existHelper(char[][] board, char[] word, int currentIndex, int row, int col) {
+
+        if (currentIndex == word.length)
+            return true;
+
+        if (row < 0
+                || row >= board.length
+                || col < 0
+                || col >= board[0].length
+                || board[row][col] != word[currentIndex]
+                )
+            return false;
+
+//        char temp = board[row][col];
+        board[row][col] ^= 256;
+        boolean result = _existHelper(board, word, currentIndex + 1, row + 1, col)
+                || _existHelper(board, word, currentIndex + 1, row, col + 1)
+                || _existHelper(board, word, currentIndex + 1, row, col - 1)
+                || _existHelper(board, word, currentIndex + 1, row - 1, col);
+        board[row][col] ^= 256;
+        return result;
+    }
+
+    /**
+     * leetCode 91
+     * @param s
+     * @return
+     */
+    public int numDecodings(String s) {
+        HashMap<Integer, Integer> dp = new HashMap<>();
+        return _numDecodings(s, 0, dp);
+    }
+
+    private int _numDecodings(String numberString, int currentIndex, HashMap<Integer, Integer> dp) {
+
+        if(currentIndex == numberString.length())
+            return 1;
+
+        if(currentIndex > numberString.length())
+            return 0;
+
+        if(dp.containsKey(currentIndex))
+        {
+            return dp.get(currentIndex);
+        }
+
+        int count = 0;
+        int number = Integer.parseInt(String.valueOf(numberString.charAt(currentIndex)));
+        if(number <= 26 && number > 0)
+        {
+            count += _numDecodings(numberString, currentIndex + 1, dp);
+        } else {
+            dp.put(currentIndex, count);
+            return count;
+        }
+
+        if(currentIndex + 1 < numberString.length())
+        {
+            number = Integer.parseInt(numberString.substring(currentIndex, currentIndex + 2));
+            if(number <= 26 && number > 0)
+            {
+                count += _numDecodings(numberString, currentIndex + 2, dp);
+            }
+        }
+        dp.put(currentIndex, count);
+        return count;
     }
 }
