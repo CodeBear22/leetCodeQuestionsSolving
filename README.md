@@ -3,7 +3,7 @@
 **_Usage_**
 
 Search problem driver in the Main.java like this problem_{leetCode problem number} eg. for 'Add Two Numbers' search like this 'problem_2'
-and in  com.kunal.leetcode.DsAlgo.java like this 'leetCode 2'
+and solution in 'src/com/kunal/leetcode'
 
 _**Problems Solved till now**_
 
