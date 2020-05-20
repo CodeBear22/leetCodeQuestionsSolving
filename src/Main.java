@@ -1,3 +1,8 @@
+import com.kunal.Permutations;
+import com.kunal.leetcode.*;
+import com.kunal.utils.Helper;
+import com.kunal.utils.ListNode;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,45 +18,44 @@ public class Main {
 
 
     public static void main(String[] args) {
-//        problem_1();
-//        problem_3();
-//        problem_5();
-//        problem_8();
-//        problem_11();
-//        problem_17();
-//        problem_19();
-//        problem_22();
-//        problem_29();
-//        problem_442();
-//        problem_46();
-//        problem_36();
-//        problem_48();
-//        problem_49();
-//        problem_54();
-//        problem_55();
-//        problem_56();
-//        problem_62();
-//        problem_63();
-//        problem_75();
-//        problem_78();
-//        problem_79();
+        problem_2();
+        problem_3();
+        problem_5();
+        problem_8();
+        problem_11();
+        problem_17();
+        problem_19();
+        problem_22();
+        problem_29();
+        problem_442();
+        problem_46();
+        problem_36();
+        problem_48();
+        problem_49();
+        problem_54();
+        problem_55();
+        problem_56();
+        problem_62();
+        problem_63();
+        problem_75();
+        problem_78();
+        problem_79();
         problem_91();
+        problem_73();
     }
-
-
 
 
     //Add Two Numbers
     public static void problem_2() {
         problemStartEndAnnouncer(2, true);
 
-        DsAlgo app = new DsAlgo();
+        AddTwoNumbers app = new AddTwoNumbers();
         int[] num1 = {2, 4, 3};
         int[] num2 = {5, 6, 4};
-        ListNode l1 = app.makeArrayToLinkedList(num1);
-        ListNode l2 = app.makeArrayToLinkedList(num2);
+        ListNode l1 = Helper.makeArrayToLinkedList(num1);
+        ListNode l2 = Helper.makeArrayToLinkedList(num2);
         ListNode result = app.addTwoNumbers(l1, l2);
-        app.printList(result);
+        Helper.printList(result);
 
         problemStartEndAnnouncer(2, false);
     }
@@ -60,7 +64,7 @@ public class Main {
     public static void problem_3() {
         problemStartEndAnnouncer(3, true);
 
-        DsAlgo app = new DsAlgo();
+        LongestSubstringWithoutRepeatingCharacters app = new LongestSubstringWithoutRepeatingCharacters();
         String input = "aabaab!bb";
         int result = app.lengthOfLongestSubstring(input);
         System.out.println(result);
@@ -72,7 +76,7 @@ public class Main {
     public static void problem_5() {
         problemStartEndAnnouncer(5, true);
 
-        DsAlgo app = new DsAlgo();
+        LongestPalindromicSubstring app = new LongestPalindromicSubstring();
 
         String input = "babad";
         String result = app.longestPalindrome(input);
@@ -85,7 +89,7 @@ public class Main {
     public static void problem_8() {
         problemStartEndAnnouncer(8, true);
 
-        DsAlgo app = new DsAlgo();
+        StringToIntegerAtoi app = new StringToIntegerAtoi();
         String input = "91283472332 with words";
         int result = app.myAtoi(input);
         System.out.println(result);
@@ -97,7 +101,7 @@ public class Main {
     public static void problem_11() {
         problemStartEndAnnouncer(11, true);
 
-        DsAlgo app = new DsAlgo();
+        ContainerWithMostWater app = new ContainerWithMostWater();
 
         int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
         int result = app.largestRectangleArea(input);
@@ -110,7 +114,7 @@ public class Main {
     public static void problem_17() {
         problemStartEndAnnouncer(17, true);
 
-        DsAlgo app = new DsAlgo();
+        LetterCombinationsOfPhoneNumber app = new LetterCombinationsOfPhoneNumber();
 
         String input = "234";
         List<String> result = app.letterCombinations(input);
@@ -121,22 +125,24 @@ public class Main {
         problemStartEndAnnouncer(17, false);
     }
 
-    //Remove Nth Node From End of List
+    //Remove Nth com.kunal.utils.Node From End of List
     public static void problem_19() {
         problemStartEndAnnouncer(19, true);
 
-        DsAlgo app = new DsAlgo();
+        RemoveNthNodeFromEndOfList app = new RemoveNthNodeFromEndOfList();
         int[] inputArr = {1, 2, 3, 4, 5};
-        ListNode inputHead = app.makeArrayToLinkedList(inputArr);
+        ListNode inputHead = Helper.makeArrayToLinkedList(inputArr);
         ListNode result = app.removeNthFromEnd(inputHead, 2);
-        app.printList(result);
+        Helper.printList(result);
+
+        problemStartEndAnnouncer(19, false);
     }
 
     //Generate Parentheses
     public static void problem_22() {
         problemStartEndAnnouncer(22, true);
 
-        DsAlgo app = new DsAlgo();
+        GenerateParentheses app = new GenerateParentheses();
         List<String> result = app.generateParenthesis(3);
 
         for (String str : result) {
@@ -150,7 +156,7 @@ public class Main {
     public static void problem_29() {
         problemStartEndAnnouncer(29, true);
 
-        DsAlgo app = new DsAlgo();
+        DivideTwoIntegers app = new DivideTwoIntegers();
         int result = app.divide(10, 3);
         System.out.println(result);
 
@@ -162,39 +168,38 @@ public class Main {
     public static void problem_442() {
         problemStartEndAnnouncer(442, true);
 
-        DsAlgo app = new DsAlgo();
-        int[] input = {4,3,2,7,8,2,3,1};
+        FindAllDuplicatesInAnArray app = new FindAllDuplicatesInAnArray();
+        int[] input = {4, 3, 2, 7, 8, 2, 3, 1};
         List<Integer> result = app.findDuplicates(input);
 
-        for(int item : result)
+        for (int item : result)
             System.out.println(item);
 
         problemStartEndAnnouncer(442, false);
     }
 
     //Permutations
-    public static void problem_46(){
-        problemStartEndAnnouncer(46,true);
+    public static void problem_46() {
+        problemStartEndAnnouncer(46, true);
 
-        DsAlgo app = new DsAlgo();
-        int[] input = {1,2,3};
+        Permutations app = new Permutations();
+        int[] input = {1, 2, 3};
         List<List<Integer>> result = app.permute(input);
 
-        for(List<Integer> list : result)
-        {
+        for (List<Integer> list : result) {
             System.out.println(Arrays.toString(list.toArray()));
         }
 
-        problemStartEndAnnouncer(46,false);
+        problemStartEndAnnouncer(46, false);
     }
 
     //Valid Sudoku
     public static void problem_36() {
         problemStartEndAnnouncer(46, true);
 
-        DsAlgo app = new DsAlgo();
+        ValidSudoku app = new ValidSudoku();
 
-        char [][] input = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
+        char[][] input = {{'5', '3', '.', '.', '7', '.', '.', '.', '.'}, {'6', '.', '.', '1', '9', '5', '.', '.', '.'}, {'.', '9', '8', '.', '.', '.', '.', '6', '.'}, {'8', '.', '.', '.', '6', '.', '.', '.', '3'}, {'4', '.', '.', '8', '.', '3', '.', '.', '1'}, {'7', '.', '.', '.', '2', '.', '.', '.', '6'}, {'.', '6', '.', '.', '.', '.', '2', '8', '.'}, {'.', '.', '.', '4', '1', '9', '.', '.', '5'}, {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
         System.out.println(app.isValidSudoku(input));
 
         problemStartEndAnnouncer(46, false);
@@ -205,12 +210,12 @@ public class Main {
     public static void problem_48() {
         problemStartEndAnnouncer(48, true);
 
-        DsAlgo app = new DsAlgo();
+        RotateImage app = new RotateImage();
         int[][] input = {
-                { 5, 1, 9,11},
-                { 2, 4, 8,10},
+                {5, 1, 9, 11},
+                {2, 4, 8, 10},
                 {13, 3, 6, 7},
-                {15,14,12,16}
+                {15, 14, 12, 16}
         };
         app.rotateMatrixNinetyDegree(input);
         problemStartEndAnnouncer(48, false);
@@ -221,13 +226,11 @@ public class Main {
         problemStartEndAnnouncer(49, true);
 
         String[] input = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        DsAlgo app = new DsAlgo();
+        GroupAnagrams app = new GroupAnagrams();
         List<List<String>> result = app.groupAnagrams(input);
 
-        for(List<String> list : result)
-        {
-            for(String str : list)
-            {
+        for (List<String> list : result) {
+            for (String str : list) {
                 System.out.print(str + "  ");
             }
             System.out.println();
@@ -240,18 +243,17 @@ public class Main {
     public static void problem_54() {
         problemStartEndAnnouncer(54, true);
 
-        DsAlgo app = new DsAlgo();
+        SpiralMatrix app = new SpiralMatrix();
 
         int[][] matrix = {
-                { 1, 2, 3 },
-                { 4, 5, 6 },
-                { 7, 8, 9 }
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
         };
 
         List<Integer> result = app.printMatrixInSpiral(matrix);
 
-        for(int i : result)
-        {
+        for (int i : result) {
             System.out.println(i);
         }
 
@@ -262,8 +264,8 @@ public class Main {
     public static void problem_55() {
         problemStartEndAnnouncer(55, true);
 
-        DsAlgo app = new DsAlgo();
-        int[] input = {2,3,1,1,4};
+        JumpGame app = new JumpGame();
+        int[] input = {2, 3, 1, 1, 4};
         System.out.println(app.canJump(input));
 
         problemStartEndAnnouncer(55, false);
@@ -273,24 +275,22 @@ public class Main {
     public static void problem_56() {
         problemStartEndAnnouncer(56, true);
 
-        DsAlgo app = new DsAlgo();
-        int[][] input = {{1,3},{2,6},{8,10},{15,18}};
+        MergeIntervals app = new MergeIntervals();
+        int[][] input = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
         int[][] result = app.mergeIntervals(input);
 
-        for(int[] row: result)
-        {
+        for (int[] row : result) {
             System.out.println(Arrays.toString(row));
         }
 
         problemStartEndAnnouncer(56, false);
     }
 
-    public static void problem_62()
-    {
+    public static void problem_62() {
         problemStartEndAnnouncer(62, true);
 
-        DsAlgo app = new DsAlgo();
-        System.out.println(app.uniquePaths(7,3));
+        UniquePaths app = new UniquePaths();
+        System.out.println(app.uniquePaths(7, 3));
 
         problemStartEndAnnouncer(62, true);
     }
@@ -298,11 +298,11 @@ public class Main {
     public static void problem_63() {
         problemStartEndAnnouncer(63, true);
 
-        DsAlgo app = new DsAlgo();
+        UniquePathsII app = new UniquePathsII();
         int[][] input = {
-                {0,0,0},
-                {0,1,0},
-                {0,0,0}
+                {0, 0, 0},
+                {0, 1, 0},
+                {0, 0, 0}
         };
         System.out.println(app.uniquePathsWithObstacles(input));
 
@@ -312,11 +312,11 @@ public class Main {
     public static void problem_73() {
         problemStartEndAnnouncer(73, true);
 
-        DsAlgo app = new DsAlgo();
+        SetMatrixZeroes app = new SetMatrixZeroes();
         int[][] input = {
-                {0,1,2,0},
-                {3,4,5,2},
-                {1,3,1,5}
+                {0, 1, 2, 0},
+                {3, 4, 5, 2},
+                {1, 3, 1, 5}
         };
         app.setZeroes(input);
 
@@ -326,8 +326,8 @@ public class Main {
     public static void problem_75() {
         problemStartEndAnnouncer(75, true);
 
-        DsAlgo app = new DsAlgo();
-        int[] input = {2,0,2,1,1,0};
+        SortColors app = new SortColors();
+        int[] input = {2, 0, 2, 1, 1, 0};
         app.sortColors(input);
 
         problemStartEndAnnouncer(75, false);
@@ -336,12 +336,11 @@ public class Main {
     public static void problem_78() {
         problemStartEndAnnouncer(78, true);
 
-        DsAlgo app = new DsAlgo();
-        int[] input = {1,2,3};
+        Subsets app = new Subsets();
+        int[] input = {1, 2, 3};
         List<List<Integer>> result = app.subsets(input);
 
-        for(List<Integer> list: result)
-        {
+        for (List<Integer> list : result) {
             System.out.println(Arrays.toString(list.toArray()));
         }
 
@@ -351,15 +350,14 @@ public class Main {
     public static void problem_79() {
         problemStartEndAnnouncer(79, true);
 
-        DsAlgo app = new DsAlgo();
+        WordSearch app = new WordSearch();
         char[][] input = {
-                {'A','B','C','E'},
-                {'S','F','C','S'},
-                {'A','D','E','E'}
+                {'A', 'B', 'C', 'E'},
+                {'S', 'F', 'C', 'S'},
+                {'A', 'D', 'E', 'E'}
         };
 
         System.out.println(app.exist(input, "ABCCED"));
-
 
         problemStartEndAnnouncer(79, false);
     }
@@ -367,7 +365,7 @@ public class Main {
     public static void problem_91() {
         problemStartEndAnnouncer(91, true);
 
-        DsAlgo app = new DsAlgo();
+        DecodeWays app = new DecodeWays();
         String input = "226";
         int result = app.numDecodings(input);
 

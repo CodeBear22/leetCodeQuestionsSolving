@@ -1,3 +1,5 @@
+package com.kunal.utils;
+
 import jdk.swing.interop.SwingInterOpUtils;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
@@ -86,8 +88,8 @@ class RandomizedSet {
 }
 
 /**
- * Your RandomizedSet object will be instantiated and called as such:
- * RandomizedSet obj = new RandomizedSet();
+ * Your com.kunal.utils.RandomizedSet object will be instantiated and called as such:
+ * com.kunal.utils.RandomizedSet obj = new com.kunal.utils.RandomizedSet();
  * boolean param_1 = obj.insert(val);
  * boolean param_2 = obj.remove(val);
  * int param_3 = obj.getRandom();

@@ -3,7 +3,7 @@
 **_Usage_**
 
 Search problem driver in the Main.java like this problem_{leetCode problem number} eg. for 'Add Two Numbers' search like this 'problem_2'
-and in  DsAlgo.java like this 'leetCode 2'
+and in  com.kunal.leetcode.DsAlgo.java like this 'leetCode 2'
 
 _**Problems Solved till now**_
 
@@ -13,7 +13,7 @@ Longest Palindromic Substring <br>
 String to Integer (atoi) <br>
 Container With Most Water <br>
 Letter Combinations of a Phone Number <br>
-Remove Nth Node From End of List <br>
+Remove Nth com.kunal.utils.Node From End of List <br>
 Generate Parentheses <br>
 Divide Two Integers <br>
 Find All Duplicates in an Array <br>
