@@ -37,4 +37,28 @@ public class Helper {
         }
         System.out.println();
     }
+
+    /**
+     * convert int[] to tree
+     */
+    public static TreeNode constructTree(Integer[] nodeValues) {
+        TreeNode root = new TreeNode(nodeValues[0]);
+        new Helper()._constructTreeHelper(0, nodeValues, root);
+        return root;
+    }
+
+    public void _constructTreeHelper(int currentIndex, Integer[] nodeValues, TreeNode root) {
+        if (root == null)
+            return;
+
+        if (currentIndex * 2 + 1 < nodeValues.length && nodeValues[currentIndex * 2 + 1] != null) {
+            root.left = new TreeNode(nodeValues[currentIndex * 2 + 1]);
+            _constructTreeHelper(currentIndex * 2 + 1, nodeValues, root.left);
+        }
+
+        if (currentIndex * 2 + 2 < nodeValues.length && nodeValues[currentIndex * 2 + 2] != null) {
+            root.right = new TreeNode(nodeValues[currentIndex * 2 + 2]);
+            _constructTreeHelper(currentIndex * 2 + 2, nodeValues, root.right);
+        }
+    }
 }

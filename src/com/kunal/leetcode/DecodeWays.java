@@ -67,4 +67,31 @@ public class DecodeWays {
         dp.put(currentIndex, count);
         return count;
     }
+
+    public int numDecodingsDynamic(String s) {
+        if(s.length() == 0)
+            return 0;
+        if(s.charAt(0) == '0')
+            return 0;
+        int[] dp = new int[s.length() + 1];
+
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for(int i = 2; i <= s.length(); i++)
+        {
+            int single = Integer.parseInt(s.substring(i - 1, i));
+            int pair = Integer.parseInt(s.substring(i-2, i));
+            
+            if(single >= 1 && single <= 9)
+                dp[i] += dp[i-1];
+
+
+            if(pair >= 10 && pair <= 26)
+                dp[i] += dp[i-1];
+        }
+
+        return dp[dp.length - 1];
+
+    }
 }

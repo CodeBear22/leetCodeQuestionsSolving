@@ -30,3 +30,8 @@ Sort Colors<br>
 Subsets<br>
 Word Search<br>
 Decode Ways<br>
+Binary Tree Inorder Traversal<br>
+Validate Binary Search Tree<br>
+Binary Tree Level Order Traversal<br>
+Binary Tree Zigzag Level Order Traversal<br>
+Construct Binary Tree from Preorder and Inorder Traversal<br>

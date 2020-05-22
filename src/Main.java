@@ -2,6 +2,7 @@ import com.kunal.Permutations;
 import com.kunal.leetcode.*;
 import com.kunal.utils.Helper;
 import com.kunal.utils.ListNode;
+import com.kunal.utils.TreeNode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,30 +19,36 @@ public class Main {
 
 
     public static void main(String[] args) {
-        problem_2();
-        problem_3();
-        problem_5();
-        problem_8();
-        problem_11();
-        problem_17();
-        problem_19();
-        problem_22();
-        problem_29();
-        problem_442();
-        problem_46();
-        problem_36();
-        problem_48();
-        problem_49();
-        problem_54();
-        problem_55();
-        problem_56();
-        problem_62();
-        problem_63();
-        problem_75();
-        problem_78();
-        problem_79();
-        problem_91();
-        problem_73();
+//        problem_2();
+//        problem_3();
+//        problem_5();
+//        problem_8();
+//        problem_11();
+//        problem_17();
+//        problem_19();
+//        problem_22();
+//        problem_29();
+//        problem_442();
+//        problem_46();
+//        problem_36();
+//        problem_48();
+//        problem_49();
+//        problem_54();
+//        problem_55();
+//        problem_56();
+//        problem_62();
+//        problem_63();
+//        problem_75();
+//        problem_78();
+//        problem_79();
+//        problem_91();
+//        problem_73();
+//        problem_94();
+//        problem_98();
+//        problem_102();
+//        problem_103();
+        problem_105();
+//        test();
     }
 
 
@@ -372,5 +379,101 @@ public class Main {
         System.out.println(result);
 
         problemStartEndAnnouncer(91, false);
+    }
+
+    public static void problem_94() {
+        problemStartEndAnnouncer(94, true);
+
+        BinaryTreeInorderTraversal app = new BinaryTreeInorderTraversal();
+
+        TreeNode root = new TreeNode(1);
+        root.left = null;
+        root.right = new TreeNode(2);
+        root.right.left = new TreeNode(3);
+        root.right.right = null;
+
+        List<Integer> result = app.inorderTraversal(root);
+
+        for (Integer val : result)
+            System.out.println(val);
+
+        problemStartEndAnnouncer(94, false);
+    }
+
+    public static void problem_98() {
+        problemStartEndAnnouncer(98, true);
+
+        ValidateBinarySearchTree app = new ValidateBinarySearchTree();
+        //{3,1,5,0,2,4,6,null,null,null,3}
+        Integer[] nodeValues = {1, null, 1};//{3, 1, 5, 0, 2, 4, 6};
+        TreeNode root = Helper.constructTree(nodeValues);
+
+        System.out.println(app.isValidBST(root));
+
+        problemStartEndAnnouncer(98, false);
+    }
+
+    public static void problem_102() {
+        problemStartEndAnnouncer(102, true);
+
+        BinaryTreeLevelOrderTraversal app = new BinaryTreeLevelOrderTraversal();
+
+        TreeNode root = new TreeNode(
+                3,
+                new TreeNode(9),
+                new TreeNode(
+                        20,
+                        new TreeNode(15),
+                        new TreeNode(7)
+                )
+        );
+        List<List<Integer>> result = app.levelOrderRecursive(root);
+
+        for (List<Integer> list : result) {
+            System.out.println(Arrays.toString(list.toArray()));
+        }
+
+        problemStartEndAnnouncer(102, false);
+    }
+
+    public static void problem_103() {
+        problemStartEndAnnouncer(103, true);
+
+        Integer[] treeNodes = {3,9,20,null,null,15,7};
+
+        TreeNode root = Helper.constructTree(treeNodes);
+
+        BinaryTreeZigzagLevelOrderTraversal app = new BinaryTreeZigzagLevelOrderTraversal();
+
+        List<List<Integer>> result = app.zigzagLevelOrder(root);
+
+        for (List<Integer> list : result) {
+            System.out.println(Arrays.toString(list.toArray()));
+        }
+
+        problemStartEndAnnouncer(103, false);
+    }
+
+    public static void problem_105() {
+        problemStartEndAnnouncer(105, true);
+
+        int[] preorder = {};
+        int[] inorder = {};
+
+        ConstructBinaryTreeFromPreorderAndInorderTraversal app = new ConstructBinaryTreeFromPreorderAndInorderTraversal();
+        TreeNode root = app.buildTree(preorder, inorder);
+
+        problemStartEndAnnouncer(105, false);
+    }
+
+    public static void test() {
+        int input = 99;
+
+//        input = {1,2,3};
+
+        DsAlgo app = new DsAlgo();
+        app.test(input);
+        System.out.println(input);
+
     }
 }
