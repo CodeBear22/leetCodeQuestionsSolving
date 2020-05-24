@@ -2,8 +2,10 @@ import com.kunal.Permutations;
 import com.kunal.leetcode.*;
 import com.kunal.utils.Helper;
 import com.kunal.utils.ListNode;
+import com.kunal.utils.Node;
 import com.kunal.utils.TreeNode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,8 +49,21 @@ public class Main {
 //        problem_98();
 //        problem_102();
 //        problem_103();
-        problem_105();
-//        test();
+//        problem_105();
+//        problem_116();
+//        problem_127();
+//        problem_130();
+//        problem_139();
+//        problem_134();
+
+//        test(20, 16, 2);
+
+    }
+
+    //testing ground
+
+    public static void test() {
+
     }
 
 
@@ -439,7 +454,7 @@ public class Main {
     public static void problem_103() {
         problemStartEndAnnouncer(103, true);
 
-        Integer[] treeNodes = {3,9,20,null,null,15,7};
+        Integer[] treeNodes = {3, 9, 20, null, null, 15, 7};
 
         TreeNode root = Helper.constructTree(treeNodes);
 
@@ -466,14 +481,96 @@ public class Main {
         problemStartEndAnnouncer(105, false);
     }
 
-    public static void test() {
-        int input = 99;
+    public static void problem_116() {
+        problemStartEndAnnouncer(116, true);
 
-//        input = {1,2,3};
+        PopulatingNextRightPointersInEachNode app = new PopulatingNextRightPointersInEachNode();
 
-        DsAlgo app = new DsAlgo();
-        app.test(input);
-        System.out.println(input);
+        Node input = new Node(
+                1,
+                new Node(
+                        2,
+                        new Node(4),
+                        new Node(5)),
+                new Node(
+                        3,
+                        new Node(6),
+                        new Node(7)
+                )
+        );
 
+        app.connect(input);
+
+        problemStartEndAnnouncer(116, false);
     }
+
+    public static void problem_127() {
+        problemStartEndAnnouncer(127, true);
+
+        WordLadder app = new WordLadder();
+
+        //"qa"
+        //"sq"
+        //["si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"]
+
+//        String[] words = {"si","go","se","cm","so","ph","mt","db","mb","sb","kr","ln","tm","le","av","sm","ar","ci","ca","br","ti","ba","to","ra","fa","yo","ow","sn","ya","cr","po","fe","ho","ma","re","or","rn","au","ur","rh","sr","tc","lt","lo","as","fr","nb","yb","if","pb","ge","th","pm","rb","sh","co","ga","li","ha","hz","no","bi","di","hi","qa","pi","os","uh","wm","an","me","mo","na","la","st","er","sc","ne","mn","mi","am","ex","pt","io","be","fm","ta","tb","ni","mr","pa","he","lr","sq","ye"};//{"hot","dot","dog","lot","log", "cog"};
+        String[] words = {"a", "b", "c"};
+        List<String> input = Arrays.asList(words);
+
+        System.out.println(app.ladderLength("a", "c", input));
+
+        problemStartEndAnnouncer(127, false);
+    }
+
+    public static void problem_130() {
+
+        problemStartEndAnnouncer(130, true);
+
+        char[][] input = {{'O', 'X', 'X', 'O', 'X'}, {'X', 'O', 'O', 'X', 'O'}, {'X', 'O', 'X', 'O', 'X'}, {'O', 'X', 'O', 'O', 'O'}, {'X', 'X', 'O', 'X', 'O'}};
+        System.out.println("Input");
+        for (char[] row : input)
+            System.out.println(Arrays.toString(row));
+        SurroundedRegions app = new SurroundedRegions();
+        app.solve(input);
+
+        System.out.println("Output");
+        for (char[] row : input)
+            System.out.println(Arrays.toString(row));
+
+        problemStartEndAnnouncer(130, true);
+    }
+
+    public static void problem_134() {
+        problemStartEndAnnouncer(134, true);
+
+        GasStation app = new GasStation();
+
+        //[1,2,3,4,5]
+        //[3,4,5,1,2]
+        //[5,1,2,3,4]
+        //[4,4,1,5,1]
+        //[3,1,1]
+        //[1,2,2]
+        int[] gas = {3, 1, 1};
+        int[] cost = {1, 2, 2};
+
+        System.out.println(app.canCompleteCircuit(gas, cost));
+        problemStartEndAnnouncer(134, false);
+    }
+
+    public static void problem_139() {
+        problemStartEndAnnouncer(139, true);
+
+        WordBreak app = new WordBreak();
+
+        List<String> input = new ArrayList<>();
+
+        input.add("leet");
+        input.add("code");
+
+        app.wordBreak("leetcode", input);
+
+        problemStartEndAnnouncer(139, false);
+    }
+
 }

@@ -854,4 +854,107 @@ public class DsAlgo {
 //        combination[currentIndex] = false;
 //        _combinationMakerHelper(nums, currentIndex + 1, combination, combinations);
 //    }
+
+
+
+    //    public static void test(int N, int T, int D) {
+//
+//        int mod = T % N;
+//        int x = D + mod - 1;
+//        int result;
+//
+//        if(x > N)
+//        {
+//            result = x - N;
+//        } else {
+//            result = x;
+//        }
+//
+//        if(result == 0)
+//            result = N;
+//        System.out.println(result);
+//    }
+
+//    public static int test(String pattern) {
+//        boolean[] digitsUsed = new boolean[10];
+//
+//        int result = 0;
+//
+//        int patternLength = pattern.length();
+//
+////        int initialM = 21;
+//
+////        int initialN = 21;
+//
+//        if (patternLength == 1 && pattern.equals("M"))
+//            return 21;
+//
+//        if (patternLength == 1 && pattern.equals("N"))
+//            return 12;
+//
+//        for (int i = 0; i < patternLength - 1; i++) {
+//
+//            if (pattern.charAt(i) == 'M') {
+//                if (result == 0) {
+//                    result = (result * 10) + getNextDigit(digitsUsed, true);
+//                    result = (result * 10) + getNextDigit(digitsUsed, false);
+//                } else {
+//                    result = (result * 10) + getNextDigit(digitsUsed, true);
+//                }
+//            } else {
+//
+//                if (result == 0) {
+//                    result = (result * 10) + getNextDigit(digitsUsed, false);
+//                    result = (result * 10) + getNextDigit(digitsUsed, true);
+//                } else {
+//                    result = (result * 10) + getNextDigit(digitsUsed, false);
+//                }
+//            }
+//        }
+//
+//        System.out.println(result);
+//        System.out.println(Arrays.toString(digitsUsed));
+//        if (patternLength > 1) {
+//            int lastDigit = result % 10;
+//            System.out.println(lastDigit);
+//
+//            if (pattern.charAt(patternLength - 1) == 'M') {
+//                for (int i = 1; i < digitsUsed.length; i++) {
+//                    if (!digitsUsed[i] && i < lastDigit) {
+//                        result = (result * 10) + i;
+//                        break;
+//                    }
+//                }
+//            } else if (pattern.charAt(patternLength - 1) == 'N'){
+//                for (int i = 1; i < digitsUsed.length; i++) {
+//                    if (!digitsUsed[i] && i > lastDigit) {
+//                        result = (result * 10) + i;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//        return result;
+//    }
+//
+//    static int getNextDigit(boolean[] usedDigits, boolean even) {
+//
+//        if (even) {
+//            for (int i = 2; i < usedDigits.length; i = i + 2) {
+//                if (!usedDigits[i]) {
+//                    usedDigits[i] = true;
+//                    return i;
+//                }
+//            }
+//        } else {
+//            for (int i = 1; i < usedDigits.length; i = i + 2) {
+//                if (!usedDigits[i]) {
+//                    usedDigits[i] = true;
+//                    return i;
+//                }
+//            }
+//
+//        }
+//        return 0;
+//    }
 }

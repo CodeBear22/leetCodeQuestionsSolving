@@ -1,5 +1,7 @@
 package com.kunal.utils;
 
+import java.util.Arrays;
+
 public class Helper {
 
     /**
@@ -60,5 +62,39 @@ public class Helper {
             root.right = new TreeNode(nodeValues[currentIndex * 2 + 2]);
             _constructTreeHelper(currentIndex * 2 + 2, nodeValues, root.right);
         }
+    }
+
+
+    public static int stringMismatchCount(String str1, String str2) {
+
+        int mismatchCount = 0;
+
+        for (int i = 0; i < str1.length(); i++) {
+            if (str1.charAt(i) != str2.charAt(i))
+                mismatchCount++;
+        }
+        return mismatchCount;
+    }
+
+    public static int stringCharacterMismatchCount(String str1, String str2) {
+        {
+            int missMatchCount = 0;
+            int[] alphabetsCount = new int[26];
+
+            Arrays.fill(alphabetsCount, 0);
+
+            for (int i = 0; i < str1.length(); i++) {
+                alphabetsCount[str1.charAt(i) - 'a'] += 1;
+            }
+
+            for (int i = 0; i < str2.length(); i++) {
+                if (alphabetsCount[str2.charAt(i) - 'a'] > 0)
+                    alphabetsCount[str2.charAt(i) - 'a']--;
+                else
+                    missMatchCount++;
+            }
+            return missMatchCount;
+        }
+
     }
 }

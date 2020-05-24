@@ -35,3 +35,7 @@ Validate Binary Search Tree<br>
 Binary Tree Level Order Traversal<br>
 Binary Tree Zigzag Level Order Traversal<br>
 Construct Binary Tree from Preorder and Inorder Traversal<br>
+Populating Next Right Pointers in Each Node<br>
+Word Ladder<br>
+Surrounded Regions<br>
+Gas Station<br>
