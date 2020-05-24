@@ -13,7 +13,7 @@ Longest Palindromic Substring <br>
 String to Integer (atoi) <br>
 Container With Most Water <br>
 Letter Combinations of a Phone Number <br>
-Remove Nth com.kunal.utils.Node From End of List <br>
+Remove Nth Node From End of List <br>
 Generate Parentheses <br>
 Divide Two Integers <br>
 Find All Duplicates in an Array <br>
