@@ -27,47 +27,49 @@ package com.kunal.leetcode;
 public class BasicCalculatorII {
     public int calculate(String s) {
 
+        s = "42";
         int result = 0;
         int num = 0;
         int tail = 0;
         char operator = '+';
         char[] expression = s.toCharArray();
+        char current;
 
         for (int i = 0; i < expression.length; i++) {
 
-            if (expression[i] == ' ')
+            current = expression[i];
+
+            if (current == ' ')
                 continue;
 
-            if (Character.isDigit(expression[i])) {
-                num = expression[i] - '0';
-                i++;
-                while (Character.isDigit(i)) {
-                    num = num * 10 + (expression[i] - '0');
+            if (Character.isDigit(current)) {
+                num = (int) current - '0';
+
+//                System.out.println(num);
+
+                while (i + 1 < expression.length && Character.isDigit(expression[i + 1])) {
                     i++;
+                    num = num * 10 + (expression[i] - '0');
                 }
 
                 switch (operator) {
-                    case '+': {
+                    case '+':
                         result += tail;
                         tail = num;
-                    }
-                    break;
+                        break;
 
-                    case '-': {
+                    case '-':
                         result += tail;
                         tail = -num;
-                    }
-                    break;
+                        break;
 
-                    case '*': {
-                        result *= tail;
-                    }
-                    break;
+                    case '*':
+                        tail *= num;
+                        break;
 
-                    case '/': {
-                        result /= tail;
-                    }
-                    break;
+                    case '/':
+                        tail /= num;
+                        break;
                 }
             } else {
                 operator = expression[i];
