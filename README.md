@@ -39,3 +39,13 @@ Populating Next Right Pointers in Each Node<br>
 Word Ladder<br>
 Surrounded Regions<br>
 Gas Station<br>
+Basic Calculator II<br>
+Course Schedule<br>
+Course Schedule II<br>
+Fraction to Recurring Decimal<br>
+Implement Trie (Prefix Tree)<br>
+Kth Smallest Element in a BST<br>
+Lowest Common Ancestor of a Binary Tree<br>
+LRU Cache<br>
+Palindrome Partitioning<br>
+
