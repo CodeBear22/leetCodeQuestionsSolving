@@ -27,7 +27,7 @@ package com.kunal.leetcode;
 public class BasicCalculatorII {
     public int calculate(String s) {
 
-        s = "42";
+//        s = "42";
         int result = 0;
         int num = 0;
         int tail = 0;
