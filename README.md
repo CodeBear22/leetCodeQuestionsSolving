@@ -48,4 +48,16 @@ Kth Smallest Element in a BST<br>
 Lowest Common Ancestor of a Binary Tree<br>
 LRU Cache<br>
 Palindrome Partitioning<br>
+Search a 2D Matrix<br>
+Search a 2D Matrix II<br>
+Integer to Roman<br>
+Longest Substring with At Least K Repeating Characters<br>
+Maximum Product Subarray<br>
+Number of Islands<br>
+Odd Even Linked List<br>
+Product of Array Except Self<br>
+RandomizedSet (Insert Delete GetRandom O(1))<br>
+Remove Duplicates from Sorted Array<br>
+Roman to Integer<br>
+Top K Frequent Elements<br>
 
